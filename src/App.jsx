@@ -229,12 +229,12 @@ function App() {
         const y = latToY(h.lat);
         const pulse = 10 + Math.sin(pulseTime) * 3;
 
-        // Glowing outer circle
-        ctx.fillStyle = highContrast ? 'transparent' : 'rgba(56, 189, 248, 0.1)';
+        // Glowing outer circle (Teal glow)
+        ctx.fillStyle = highContrast ? 'transparent' : 'rgba(6, 182, 212, 0.15)';
         ctx.beginPath();
         ctx.arc(x, y, pulse, 0, Math.PI * 2);
         ctx.fill();
-        ctx.strokeStyle = '#38bdf8';
+        ctx.strokeStyle = '#06b6d4';
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.arc(x, y, 6, 0, Math.PI * 2);
@@ -245,17 +245,17 @@ function App() {
         ctx.fillText(h.name, x + 10, y + 3);
       });
 
-      // 4. Draw Congestion Hotspots (visualized from benchmark results)
+      // 4. Draw Congestion Hotspots (visualized from benchmark results - Neon Rose)
       benchmarkResult.hotspots.forEach(h => {
         const x = lonToX(h.lon);
         const y = latToY(h.lat);
         
-        ctx.fillStyle = `rgba(239, 68, 68, ${0.1 + Math.sin(pulseTime * 1.5) * 0.05})`;
+        ctx.fillStyle = `rgba(244, 63, 94, ${0.1 + Math.sin(pulseTime * 1.5) * 0.05})`;
         ctx.beginPath();
         ctx.arc(x, y, 35, 0, Math.PI * 2);
         ctx.fill();
 
-        ctx.strokeStyle = `rgba(239, 68, 68, 0.3)`;
+        ctx.strokeStyle = `rgba(244, 63, 94, 0.3)`;
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.arc(x, y, 20, 0, Math.PI * 2);
@@ -269,14 +269,14 @@ function App() {
 
         // Define colors based on status
         let dotColor = '#10b981'; // In-transit (Green)
-        if (v.status === 'delayed') dotColor = '#f59e0b'; // Delayed (Yellow/Orange)
-        if (v.status === 'charging') dotColor = '#38bdf8'; // Charging (Blue)
+        if (v.status === 'delayed') dotColor = '#fbbf24'; // Delayed (Amber/Warning)
+        if (v.status === 'charging') dotColor = '#06b6d4'; // Charging (Teal)
         if (v.status === 'idle') dotColor = '#94a3b8'; // Idle (Grey)
 
-        // Draw selection highlight ring if clicked
+        // Draw selection highlight ring if clicked (Fuchsia)
         if (selectedVehicle && selectedVehicle.id === v.id) {
-          ctx.strokeStyle = '#ffffff';
-          ctx.lineWidth = 1.5;
+          ctx.strokeStyle = '#d946ef';
+          ctx.lineWidth = 2;
           ctx.beginPath();
           ctx.arc(x, y, 10, 0, Math.PI * 2);
           ctx.stroke();
@@ -552,7 +552,11 @@ function App() {
       <nav className="sidebar" aria-label="Main Navigation">
         <div>
           <div className="logo-container">
-            <div className="logo-icon" aria-hidden="true">A</div>
+            <div className="logo-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ filter: 'drop-shadow(0 0 4px rgba(255,255,255,0.5))' }}>
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor"/>
+              </svg>
+            </div>
             <div className="logo-text">APEXFLOW</div>
           </div>
           
